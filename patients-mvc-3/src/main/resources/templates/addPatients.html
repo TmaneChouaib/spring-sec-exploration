@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:layout="http//www.ultraq.net.nz/thymeleaf/layout"
+                layout:decorate="navbar">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Form Patients</title>
+  <link rel="stylesheet" href="/webjars/bootstrap/5.2.3/css/bootstrap.min.css">
+</head>
+<body>
+<div layout:fragment="contentPagePatient">
+
+  <div class="d-flex justify-content-center mt-5 pt-5">
+    <div class="col-md-4">
+
+      <form th:action="@{save}" method="post">
+        <div class="container">
+          <h2 class="text-center">Form Add Patient</h2>
+
+          <div class="mt-2">
+            <label class="form-label">Name :</label>
+            <input type="text" name="nom" class="form-control" th:value="${patient.nom}">
+            <span th:errors="${patient.nom}" class="text-danger"></span>
+          </div>
+
+          <div class="mt-2">
+            <label class="form-label">Date :</label>
+            <input type="date" name="DateNaissance" class="form-control" th:value="${patient.dateNaissance}">
+            <span th:errors="${patient.dateNaissance}" class="text-danger"></span>
+          </div>
+
+          <div class="form-check mt-3">
+            <input type="checkbox" name="Malade" class="form-check-input" th:cheched="${patient.malade}">
+            <label class="form-check-label">Sick </label>
+            <span th:errors="${patient.malade}" class="text-danger"></span>
+          </div>
+
+          <div class="mt-2">
+            <label class="form-label">Score :</label>
+            <input type="text" name="score" class="form-control" th:value="${patient.score}">
+            <span th:errors="${patient.score}" class="text-danger"></span>
+          </div>
+
+          <div class="d-flex justify-content-center mt-5">
+            <button type="submit" class="btn btn-dark mt-2">Add</button>
+          </div>
+
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
