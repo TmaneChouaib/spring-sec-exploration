@@ -32,7 +32,6 @@ public class SecurityConfig {
                 User.withUsername("user1").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("user2").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("admin").password(passwordEncoder.encode("1234")).roles("ADMIN","USER").build()
-
         );
     }*/
     @Bean
@@ -54,22 +53,17 @@ public class SecurityConfig {
             //accountService.addNewRole("USER");
             //accountService.addNewRole("ADMIN");
 
-
             //accountService.addNewUser("user1","1234","user1@gmail.com","1234");
             //accountService.addNewUser("user2","1234","user2@gmail.com","1234");
             //accountService.addNewUser("admin","1234","admin@gmail.com","1234");
 
-
             //accountService.addRoleToUser("user1","USER");
             //accountService.addRoleToUser("user1","ADMIN");
 
-
             //accountService.addRoleToUser("user2","USER");
-
 
             //accountService.addRoleToUser("admin","USER");
             //accountService.addRoleToUser("admin","ADMIN");
-
         };
     }
 }

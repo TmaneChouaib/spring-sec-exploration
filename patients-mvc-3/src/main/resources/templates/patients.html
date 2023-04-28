@@ -17,7 +17,7 @@
     <div class="card text-center">
       <div class="d-flex justify-content-center border border-dark">
         <div class="col-md-6">
-          <div class="card-header bg-dark bg-subtle text-white h1">Patients lists</div>
+          <div class="card-header bg-dark bg-subtle text-white h1">Patiens Index</div>
         </div>
       </div>
       <div class="card-body">
@@ -46,7 +46,7 @@
             <td th:text="${p.score}"></td>
             <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
               <a onclick="return confirm('Etes vous sure de vouloir supprimer cette ligne?')"
-                 class="btn btn-danger border-dark" th:href="@{/admin/delete(id=${p.id}, keyWord=${keyWord}, page=${currentPage})}">
+                 class="btn btn-danger border-dark" th:href="@{/admin/deletePatients(id=${p.id}, keyWord=${keyWord}, page=${currentPage})}">
               Delete</a>
               <a class="btn btn-warning border-dark ms-4" th:href="@{/admin/editPatients(id=${p.id}, keyWord=${keyWord}, page=${currentPage})}">Update</a>
             </td>

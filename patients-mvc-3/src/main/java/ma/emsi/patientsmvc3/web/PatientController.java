@@ -41,12 +41,6 @@ public class PatientController {
         //retourne une vue appele patients.html
         return "patients";
     }
-    @GetMapping("/admin/delete")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String delete(Long id, String keyWord, int page){
-        patientRepository.deleteById(id);
-        return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
-    }
 
     @GetMapping("/admin/addPatients")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -79,7 +73,14 @@ public class PatientController {
         return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
     }
 
-    @GetMapping("/patientsJson")
+    @GetMapping("/admin/deletePatients")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public String delete(Long id, String keyWord, int page){
+        patientRepository.deleteById(id);
+        return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
+    }
+
+    @GetMapping("/admin/patientsJson")
     @ResponseBody
     public List<Patient> listePatients(){
         return patientRepository.findAll();
