@@ -6,6 +6,7 @@ import ma.emsi.patientsmvc3.entities.Patient;
 import ma.emsi.patientsmvc3.repositories.PatientRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,18 +42,21 @@ public class PatientController {
         return "patients";
     }
     @GetMapping("/admin/delete")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String delete(Long id, String keyWord, int page){
         patientRepository.deleteById(id);
         return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
     }
 
     @GetMapping("/admin/addPatients")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String addPatients(Model model){
         model.addAttribute("patient",new Patient());
         return "addPatients";
     }
 
     @GetMapping("/admin/editPatients")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String editPatients(Model model ,Long id ,String keyWord ,int page){
     Patient patient=patientRepository.findById(id).orElse(null);
     if(patient==null) throw new RuntimeException("Patient introuvable");
@@ -63,6 +67,7 @@ public class PatientController {
     }
 
     @PostMapping(path="/admin/save")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String save(Model mode,
                        @Valid Patient patient ,
                        BindingResult bindingResult ,
