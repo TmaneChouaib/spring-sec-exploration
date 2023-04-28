@@ -23,10 +23,10 @@ public class PatientController {
 
     @GetMapping("/")
     public String home(){
-        return "redirect:/index";
+        return "redirect:/user/index";
     }
 
-    @GetMapping(path="/index")
+    @GetMapping(path="/user/index")
     public String index(Model model ,
                                     @RequestParam(name="page",defaultValue = "0") int page ,
                                     @RequestParam(name="size",defaultValue = "5")  int size ,
@@ -40,19 +40,19 @@ public class PatientController {
         //retourne une vue appele patients.html
         return "patients";
     }
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(Long id, String keyWord, int page){
         patientRepository.deleteById(id);
-        return "redirect:/index?page="+page+"&keyWord="+keyWord;
+        return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
     }
 
-    @GetMapping("/addPatients")
+    @GetMapping("/admin/addPatients")
     public String addPatients(Model model){
         model.addAttribute("patient",new Patient());
         return "addPatients";
     }
 
-    @GetMapping("/editPatients")
+    @GetMapping("/admin/editPatients")
     public String editPatients(Model model ,Long id ,String keyWord ,int page){
     Patient patient=patientRepository.findById(id).orElse(null);
     if(patient==null) throw new RuntimeException("Patient introuvable");
@@ -62,7 +62,7 @@ public class PatientController {
     return "editPatients";
     }
 
-    @PostMapping(path="/save")
+    @PostMapping(path="/admin/save")
     public String save(Model mode,
                        @Valid Patient patient ,
                        BindingResult bindingResult ,
@@ -71,7 +71,7 @@ public class PatientController {
         if(bindingResult.hasErrors())
             return "addPatients";
         patientRepository.save(patient);
-        return "redirect:/index?page="+page+"&keyWord="+keyWord;
+        return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
     }
 
     @GetMapping("/patientsJson")
