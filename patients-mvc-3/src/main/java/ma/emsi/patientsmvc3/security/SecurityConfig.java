@@ -24,14 +24,6 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
 
     //@Bean
-    public UserDetailsService userDetailsService(){
-        return new UserDetailsService() {
-            @Override
-            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                return null;
-            }
-        };
-    }
 /*    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
         return new InMemoryUserDetailsManager(
                 User.withUsername("user1").password(passwordEncoder.encode("1234")).roles("USER").build(),
@@ -65,7 +57,6 @@ public class SecurityConfig {
             accountService.addRoleToUser("user1","USER");
             accountService.addRoleToUser("user2","USER");
             accountService.addRoleToUser("admin","USER");
-            accountService.addRoleToUser("admin","ADMIN");
 
         };
     }
