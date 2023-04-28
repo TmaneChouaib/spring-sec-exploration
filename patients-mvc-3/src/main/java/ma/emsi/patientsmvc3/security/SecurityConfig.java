@@ -1,6 +1,8 @@
 package ma.emsi.patientsmvc3.security;
 
+import lombok.AllArgsConstructor;
 import ma.emsi.patientsmvc3.security.service.AccountService;
+import ma.emsi.patientsmvc3.security.service.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -19,9 +21,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
+@AllArgsConstructor
 public class SecurityConfig {
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    private UserDetailServiceImpl userDetailServiceImpl;
 
     //@Bean
 /*    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
@@ -42,21 +45,30 @@ public class SecurityConfig {
         //httpSecurity.authorizeHttpRequests().requestMatchers("/admin/**").hasRole("ADMIN");
         httpSecurity.authorizeHttpRequests().anyRequest().authenticated();
         httpSecurity.exceptionHandling().accessDeniedPage("/notAuthorized");
+        httpSecurity.userDetailsService(userDetailServiceImpl);
         return httpSecurity.build();
     }
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(AccountService accountService){
         return args->{
-            accountService.addNewRole("USER");
-            accountService.addNewRole("ADMIN");
+            //accountService.addNewRole("USER");
+            //accountService.addNewRole("ADMIN");
 
-            accountService.addNewUser("user1","1234","user1@gmail.com","1234");
-            accountService.addNewUser("user2","1234","user2@gmail.com","1234");
-            accountService.addNewUser("admin","1234","admin@gmail.com","1234");
 
-            accountService.addRoleToUser("user1","USER");
-            accountService.addRoleToUser("user2","USER");
-            accountService.addRoleToUser("admin","USER");
+            //accountService.addNewUser("user1","1234","user1@gmail.com","1234");
+            //accountService.addNewUser("user2","1234","user2@gmail.com","1234");
+            //accountService.addNewUser("admin","1234","admin@gmail.com","1234");
+
+
+            //accountService.addRoleToUser("user1","USER");
+            //accountService.addRoleToUser("user1","ADMIN");
+
+
+            //accountService.addRoleToUser("user2","USER");
+
+
+            //accountService.addRoleToUser("admin","USER");
+            //accountService.addRoleToUser("admin","ADMIN");
 
         };
     }
