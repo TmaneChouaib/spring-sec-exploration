@@ -19,13 +19,13 @@ public class Patient {
     private Long id;
     @NotEmpty
     @Size(min = 4 , max = 40)
-    private String nom;
+    private String name;
+
+    @DecimalMin("20")
+    private int age;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dateNaissance;
-    private boolean malade;
-    @DecimalMin("10")
-    private int score;
-
+    private Date date;
+    private boolean sick;
 
 }

@@ -13,7 +13,7 @@
 <div layout:fragment="contentPagePatient">
   <div class="d-flex justify-content-center mt-5 pt-5">
     <div class="col-md-4">
-      <form th:action="@{save(page=${page} , keyWord=${keyWord})}" method="post">
+      <form th:action="@{savePatients(page=${page} , keyWord=${keyWord})}" method="post">
         <div class="container">
           <h2 class="text-center">Form Edit Patient</h2>
           <div class="mt-2">
@@ -23,23 +23,23 @@
           </div>
           <div class="mt-2">
             <label class="form-label">Name :</label>
-            <input type="text" name="nom" class="form-control" th:value="${patient.nom}">
-            <span th:errors="${patient.nom}" class="text-danger"></span>
+            <input type="text" name="name" class="form-control" th:value="${patient.name}">
+            <span th:errors="${patient.name}" class="text-danger"></span>
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Age :</label>
+            <input type="number" name="age" class="form-control" th:value="${patient.age}">
+            <span th:errors="${patient.age}" class="text-danger"></span>
           </div>
           <div class="mt-2">
             <label class="form-label">Date :</label>
-            <input type="date" name="DateNaissance" class="form-control" th:value="${patient.dateNaissance}">
-            <span th:errors="${patient.dateNaissance}" class="text-danger"></span>
+            <input type="date" name="date" class="form-control" th:value="${patient.date}">
+            <span th:errors="${patient.date}" class="text-danger"></span>
           </div>
           <div class="form-check mt-3">
-            <input type="checkbox" name="Malade" class="form-check-input" th:cheched="${patient.malade}">
+            <input type="checkbox" name="sick" class="form-check-input" th:cheched="${patient.sick}">
             <label class="form-check-label">Sick </label>
-            <span th:errors="${patient.malade}" class="text-danger"></span>
-          </div>
-          <div class="mt-2">
-            <label class="form-label">Score :</label>
-            <input type="text" name="score" class="form-control" th:value="${patient.score}">
-            <span th:errors="${patient.score}" class="text-danger"></span>
+            <span th:errors="${patient.sick}" class="text-danger"></span>
           </div>
           <div class="d-flex justify-content-center mt-5">
             <button type="submit" class="btn btn-dark mt-2">Update</button>

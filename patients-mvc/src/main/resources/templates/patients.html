@@ -31,21 +31,21 @@
           <tr class="table table-dark text-white h3">
             <th>ID</th>
             <th>Name</th>
+            <th>Age</th>
             <th>Date</th>
             <th>Sick</th>
-            <th>Score</th>
             <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Action</th>
           </tr>
           </thead>
           <tbody>
           <tr th:each="p:${listPatients}">
             <td class="bg-dark text-white h3" th:text="${p.id}"></td>
-            <td th:text="${p.nom}"></td>
-            <td th:text="${p.dateNaissance}"></td>
-            <td th:text="${p.malade}"></td>
-            <td th:text="${p.score}"></td>
+            <td th:text="${p.name}"></td>
+            <td th:text="${p.age}"></td>
+            <td th:text="${p.date}"></td>
+            <td th:text="${p.sick}"></td>
             <td th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-              <a onclick="return confirm('Etes vous sure de vouloir supprimer cette ligne?')"
+              <a onclick="return confirm('Do you really want to remove this line?')"
                  class="btn btn-danger border-dark" th:href="@{/admin/deletePatients(id=${p.id}, keyWord=${keyWord}, page=${currentPage})}">
               Delete</a>
               <a class="btn btn-warning border-dark ms-4" th:href="@{/admin/editPatients(id=${p.id}, keyWord=${keyWord}, page=${currentPage})}">Update</a>

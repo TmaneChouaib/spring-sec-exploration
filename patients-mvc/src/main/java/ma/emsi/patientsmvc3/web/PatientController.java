@@ -27,13 +27,19 @@ public class PatientController {
         return "redirect:/user/index";
     }
 
+    @GetMapping("/admin/patientsJson")
+    @ResponseBody
+    public List<Patient> listePatients(){
+        return patientRepository.findAll();
+    }
+
     @GetMapping(path="/user/index")
     public String index(Model model ,
                                     @RequestParam(name="page",defaultValue = "0") int page ,
                                     @RequestParam(name="size",defaultValue = "5")  int size ,
                                     @RequestParam(name="keyWord", defaultValue = "") String keyWord)
     {
-        Page<Patient> pagePatients=patientRepository.findByNomContains(keyWord,PageRequest.of(page,size));
+        Page<Patient> pagePatients=patientRepository.findByNameContains(keyWord,PageRequest.of(page,size));
         model.addAttribute("listPatients",pagePatients.getContent());
         model.addAttribute("pages",new int[pagePatients.getTotalPages()]);
         model.addAttribute("currentPage",page);
@@ -60,9 +66,9 @@ public class PatientController {
     return "editPatients";
     }
 
-    @PostMapping(path="/admin/save")
+    @PostMapping(path="/admin/savePatients")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    public String save(Model mode,
+    public String savePatients(Model mode,
                        @Valid Patient patient ,
                        BindingResult bindingResult ,
                        @RequestParam (defaultValue = "0") int page ,
@@ -80,9 +86,4 @@ public class PatientController {
         return "redirect:/user/index?page="+page+"&keyWord="+keyWord;
     }
 
-    @GetMapping("/admin/patientsJson")
-    @ResponseBody
-    public List<Patient> listePatients(){
-        return patientRepository.findAll();
-    }
 }
