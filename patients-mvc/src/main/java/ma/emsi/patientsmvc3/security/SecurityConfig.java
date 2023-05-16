@@ -27,13 +27,13 @@ public class SecurityConfig {
     private UserDetailServiceImpl userDetailServiceImpl;
 
     //@Bean
-/*    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
+   public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
         return new InMemoryUserDetailsManager(
                 User.withUsername("user1").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("user2").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("admin").password(passwordEncoder.encode("1234")).roles("ADMIN","USER").build()
         );
-    }*/
+    }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.formLogin().loginPage("/login").permitAll();
@@ -47,7 +47,7 @@ public class SecurityConfig {
         httpSecurity.userDetailsService(userDetailServiceImpl);
         return httpSecurity.build();
     }
-    @Bean
+    //@Bean
     CommandLineRunner commandLineRunner(AccountService accountService){
         return args->{
             accountService.addNewRole("USER");
