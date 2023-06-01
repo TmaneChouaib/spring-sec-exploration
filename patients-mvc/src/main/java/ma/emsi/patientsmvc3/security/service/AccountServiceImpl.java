@@ -1,14 +1,14 @@
 package ma.emsi.patientsmvc3.security.service;
 
-import jakarta.persistence.Id;
-import lombok.AllArgsConstructor;
-import ma.emsi.patientsmvc3.security.UserRepository.AppRoleRepository;
-import ma.emsi.patientsmvc3.security.UserRepository.AppUserRepository;
-import ma.emsi.patientsmvc3.security.entities.AppRole;
 import ma.emsi.patientsmvc3.security.entities.AppUser;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import ma.emsi.patientsmvc3.security.entities.AppRole;
+import ma.emsi.patientsmvc3.security.UserRepository.AppUserRepository;
+import ma.emsi.patientsmvc3.security.UserRepository.AppRoleRepository;
+
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;
 
@@ -52,7 +52,6 @@ public class AccountServiceImpl implements AccountService {
         AppRole appRole=appRoleRepository.findById(role).get();
         appUser.getRoles().add(appRole);
         //appUserRepository.save(appUser);
-
     }
 
     @Override

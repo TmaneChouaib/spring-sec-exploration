@@ -1,22 +1,19 @@
 package ma.emsi.patientsmvc3.security;
 
-import lombok.AllArgsConstructor;
 import ma.emsi.patientsmvc3.security.service.AccountService;
 import ma.emsi.patientsmvc3.security.service.UserDetailServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.boot.CommandLineRunner;
 
 @Configuration
 @EnableWebSecurity
@@ -26,6 +23,7 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
     private UserDetailServiceImpl userDetailServiceImpl;
 
+    /*
     //@Bean
    public InMemoryUserDetailsManager inMemoryUserDetailsManager(){
         return new InMemoryUserDetailsManager(
@@ -33,7 +31,8 @@ public class SecurityConfig {
                 User.withUsername("user2").password(passwordEncoder.encode("1234")).roles("USER").build(),
                 User.withUsername("admin").password(passwordEncoder.encode("1234")).roles("ADMIN","USER").build()
         );
-    }
+    }*/
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         httpSecurity.formLogin().loginPage("/login").permitAll();
@@ -47,6 +46,7 @@ public class SecurityConfig {
         httpSecurity.userDetailsService(userDetailServiceImpl);
         return httpSecurity.build();
     }
+
     //@Bean
     CommandLineRunner commandLineRunner(AccountService accountService){
         return args->{
